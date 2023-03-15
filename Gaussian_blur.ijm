@@ -11,8 +11,8 @@ while (nImages > 0) {
 		newFileName = fileNameWithoutExtension + "gBlur02-0.tif" ;
 	
 	run("Gaussian Blur...", "sigma=2.0 stack");
-	//saveAs("Tiff","/Users/domchom/Desktop/process_folder/test_220301-gaussian-blur/084DCE/test/blur/waves/"+newFileName);
-	run("Save");
+	saveAs("Tiff","/Volumes/DOM_LS/125DCE_230224_Rho-IT-waves_SFC/processed/crop_trimmer_10-x_diff12_gblur2.0/"+newFileName);
+	//run("Save");
 	close();
 }
 

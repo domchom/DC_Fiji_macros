@@ -16,7 +16,7 @@ while (nImages > 0) {
 	waitForUser("Select the ROI");
 	selectWindow(fileName);
 	run("Crop");
-	saveAs("Tiff","/Users/chomchai/Desktop/process_folder/071DCE/"+newFileName);
+	saveAs("Tiff","/Volumes/DOM_LS/127DCE_230302_Ect2-GFP_dtom-rGBD_SFC_LS/SFC/processed/crop/"+newFileName);
 	//change the above to save to a certain folder
 	close();
 

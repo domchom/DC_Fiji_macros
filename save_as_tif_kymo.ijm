@@ -8,12 +8,12 @@ while (nImages > 0) {
 	//this and the following line get the file name without the extension
 	fileNameWithoutExtension = substring(fileName, 0, dotIndex); 
 	//this and the above line get the file name without the extension
-	newFileName = fileNameWithoutExtension + "_avi.avi" ;
+	newFileName = fileNameWithoutExtension + "_kymo.tif" ;
 
 	fullPath = path + "/" + newFileName;
 	//creates a save path for the newly created file
 
-	saveAs("Avi","/Users/domchom/Documents/Bement_lab/Meeting_Notes:Slides/!Lab_Meetings/230227_Rho-IT-waves/"+newFileName);	
+	saveAs("Tif","/Volumes/DOM_THREE/118DCE_230118_Ect2-Mgc-SFC/118processed/60x/reg-crop-better_ones_kymo/"+newFileName);	
 	//save(fullPath) ;
 	close();
 					}

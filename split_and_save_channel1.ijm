@@ -1,7 +1,5 @@
 while (nImages > 0) {
 
-	//this script only works for two channel movies
-	//this script is used for converting two/three channel movies into one channel movies
 	//this is accomp[lished by splitting the channels, and then deleting the second channel
 	//so this script only works for saving the first channel and not the sceond
 	fileName = getInfo("image.filename") ; 
@@ -20,7 +18,6 @@ while (nImages > 0) {
 	run("Split Channels");
 	close();
 
-	saveAs("Tiff","/Users/chomchai/Desktop/test_image_process_datasets/"+newFileName);	
-	//save(fullPath) ;
+	saveAs("Tiff","/Users/domchom/Desktop/112DCE_Ect2-titrate/untitled folder/"+newFileName);	
 	close();
 					}
