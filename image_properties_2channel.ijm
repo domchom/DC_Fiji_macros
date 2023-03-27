@@ -5,10 +5,10 @@ while (nImages > 0) {
 	Stack.setDisplayMode("composite");
 	Stack.setChannel(1);
 	run("Green");
-	run("Enhance Contrast", "saturated=0.35");
+	resetMinAndMax();
 	Stack.setChannel(2);
 	run("Magenta");
-	run("Enhance Contrast", "saturated=0.35");
+	resetMinAndMax();
 	run("Save");
 	close();
 	

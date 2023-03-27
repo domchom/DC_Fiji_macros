@@ -11,12 +11,14 @@ while (nImages > 0) {
 	fileNameWithoutExtension = substring(fileName, 0, dotIndex); 
 	//this and the above line get the file name without the extension
 	newFileName = fileNameWithoutExtension + "Crop.tif" ;
-
+	
+	run("Animation Options...", "speed=20");
 	doCommand("Start Animation [\\]");
+
 	waitForUser("Select the ROI");
 	selectWindow(fileName);
 	run("Crop");
-	saveAs("Tiff","/Volumes/DOM_LS/127DCE_230302_Ect2-GFP_dtom-rGBD_SFC_LS/SFC/processed/crop/"+newFileName);
+	saveAs("Tiff","/Volumes/DOM_LS/129DCE_230316_Rho-IT-waves-SFC/processed/t-series/raw_crop/"+newFileName);
 	//change the above to save to a certain folder
 	close();
 
