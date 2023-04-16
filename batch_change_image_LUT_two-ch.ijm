@@ -1,4 +1,3 @@
-
 while (nImages > 0) {
 
 	//run("Properties...", "unit=micron pixel_width=0.385 pixel_height=0.385 voxel_depth=0.5 frame=5");
