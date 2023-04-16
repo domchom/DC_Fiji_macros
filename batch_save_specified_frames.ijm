@@ -1,8 +1,8 @@
 // Define the folder where cropped images will be saved
 output_folder_path = "/Users/domchom/Desktop/macro_testing/noise/";
 
-beginning_frame = "15"
-end_frame = "1000" // set the end frame to a large number initially
+beginning_frame = "15";
+end_frame = "1000"; // set the end frame to a large number initially
 
 for (i = 0; nImages > 0; i++) {
 		
