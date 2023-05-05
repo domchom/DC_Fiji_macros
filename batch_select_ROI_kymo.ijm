@@ -1,7 +1,7 @@
 // This script crops all open images to the user-selected ROI and saves them as TIFF files in a specified folder.
 
 // Define the folder where cropped images will be saved
-output_folder_path = "/Volumes/DOM_FIVE/138DCE_230427_IT-Rho_waves-side_SFC/processed/crop/";
+output_folder_path = "/Users/domchom/Desktop/kymograph_analysis_testing/";
 
 while (nImages > 0) {
 	// Get the name of the current image
@@ -10,7 +10,7 @@ while (nImages > 0) {
 	dotIndex = indexOf(fileName, ".");  
 	//this and the following line get the file name without the extension
 	fileNameWithoutExtension = substring(fileName, 0, dotIndex); 
-	newFileName = fileNameWithoutExtension + "_crop.tif" ;
+	newFileName = fileNameWithoutExtension + "_kymo.tif" ;
 	
 	// start the animation of the movie
 	run("Animation Options...", "speed=20");
@@ -20,8 +20,10 @@ while (nImages > 0) {
 	selectWindow(fileName);
 	
 	//crop the image to the ROI
-	run("Crop");
+	run("Reslice [/]...", "output=1.000 slice_count=1 avoid");;
 	saveAs("Tiff", output_folder_path + newFileName);
 	close();
+	close();
+
 
 }

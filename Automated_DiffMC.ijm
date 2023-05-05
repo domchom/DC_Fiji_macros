@@ -1,8 +1,8 @@
 //This macro creates difference movies from multi-channel movies
-differenceNumber = 5 ;
+differenceNumber = 5;
 
 // Define the folder where processed images will be saved
-output_folder_path = "/Users/domchom/Desktop/macro_testing/noise/";
+output_folder_path = "/Volumes/DOM_FIVE/138DCE_230427_IT-Rho_waves-side_SFC/processed/crop_diff/";
 
 while (nImages > 0) {
 	getDimensions(width, height, channels, slices, frames) ;		

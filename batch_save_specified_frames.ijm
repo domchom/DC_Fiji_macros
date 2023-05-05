@@ -1,8 +1,8 @@
 // Define the folder where cropped images will be saved
-output_folder_path = "/Users/domchom/Desktop/macro_testing/noise/";
+output_folder_path = "/Users/domchom/Desktop/Cell_profiler_test/CP_PatternAnalysis/dom_testing/IMAGES_SHORT/";
 
-beginning_frame = "15";
-end_frame = "1000"; // set the end frame to a large number initially
+beginning_frame = 65;
+end_frame = 1000; // set the end frame to a large number initially
 
 for (i = 0; nImages > 0; i++) {
 		
@@ -18,7 +18,7 @@ for (i = 0; nImages > 0; i++) {
 	//this and the above line get the file name without the extension
 	newFileName = image_title_without_extension + "_frames" + beginning_frame + "-" + end_frame + ".tif" ;
 		
-	run("Duplicate...", "duplicate frames=" + beginning_frame + "-" + end_frame);
+	run("Duplicate...", " ignore duplicate range=" + beginning_frame + "-" + end_frame);
 	saveAs("Tiff", output_folder_path + newFileName);
 	close();
 	close();
