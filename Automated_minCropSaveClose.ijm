@@ -1,5 +1,5 @@
 // Define the folder where cropped images will be saved
-output_folder_path = "/Users/domchom/Desktop/macro_testing/noise/";
+output_folder_path = "/Users/domchom/Desktop/143/raw/";
 
 while (nImages > 0) {
 

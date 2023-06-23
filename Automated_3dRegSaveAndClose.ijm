@@ -1,5 +1,5 @@
 // Define the folder where processed images will be saved
-output_folder_path = "/Volumes/DOM_FIVE/138DCE_230427_IT-Rho_waves-side_SFC/processed/crop_reg/";
+output_folder_path = "/Users/domchom/Desktop/143/raw/";
 
 while (nImages > 0) {
 

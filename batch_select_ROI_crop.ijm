@@ -1,7 +1,7 @@
 // This script crops all open images to the user-selected ROI and saves them as TIFF files in a specified folder.
 
 // Define the folder where cropped images will be saved
-output_folder_path = "/Volumes/DOM_FIVE/138DCE_230427_IT-Rho_waves-side_SFC/processed/crop/";
+output_folder_path = "/Users/domchom/Desktop/143/raw_crop/";
 
 while (nImages > 0) {
 	// Get the name of the current image
@@ -13,7 +13,7 @@ while (nImages > 0) {
 	newFileName = fileNameWithoutExtension + "_crop.tif" ;
 	
 	// start the animation of the movie
-	run("Animation Options...", "speed=20");
+	run("Animation Options...", "speed=50");
 	doCommand("Start Animation [\\]");
 
 	waitForUser("Select the ROI for " + fileName);
