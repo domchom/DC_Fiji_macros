@@ -2,7 +2,7 @@
 differenceNumber = 8;
 
 // Define the folder where processed images will be saved
-output_folder_path = "/Users/domchom/Desktop/143/raw_crop_diff/";
+output_folder_path = "/Volumes/T7/013IHE_Ect2-ROCK-mutants-take3/processed/raw_crop_diff/";
 
 while (nImages > 0) {
 	getDimensions(width, height, channels, slices, frames) ;		

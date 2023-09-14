@@ -1,5 +1,5 @@
 // Define the folder where processed images will be saved
-output_folder_path = "/Users/domchom/Documents/Bement_lab/Meeting:conferences/!Lab_Meetings/230911_titrate-RGA/";
+output_folder_path = "/Users/domchom/Documents/Bement_lab/Meeting_Notes:Slides/230726_committee-meeting/";
 
 while (nImages > 0) {
 	

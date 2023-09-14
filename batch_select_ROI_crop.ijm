@@ -1,7 +1,7 @@
 // This script crops all open images to the user-selected ROI and saves them as TIFF files in a specified folder.
 
 // Define the folder where cropped images will be saved
-output_folder_path = "/Users/domchom/Desktop/143/raw_crop/";
+output_folder_path = "/Volumes/T7/015IHE_Ect2-ROCK-mutants-take5/processed/raw_bleach_crop/";
 
 while (nImages > 0) {
 	// Get the name of the current image

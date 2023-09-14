@@ -1,8 +1,8 @@
 // Define the folder where cropped images will be saved
-output_folder_path = "/Users/domchom/Desktop/Cell_profiler_test/CP_PatternAnalysis/dom_testing/IMAGES_SHORT/";
+output_folder_path = "/Volumes/DOM_FIVE/159DCE/processed/raw_crop_trimmed/";
 
-beginning_frame = 65;
-end_frame = 1000; // set the end frame to a large number initially
+beginning_frame = 15;
+end_frame = 1000000000; // set the end frame to a large number if want all frames at end
 
 for (i = 0; nImages > 0; i++) {
 		
