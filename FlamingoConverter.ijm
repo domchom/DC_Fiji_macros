@@ -197,10 +197,10 @@ if (fileformat == "raw") {
 	Dialog.addNumber("Image height:", 2048);
 }
 Dialog.addMessage("Enter details of your imaging experiment:");
-Dialog.addNumber("Detection magnification:", 10);
+Dialog.addNumber("Detection magnification:", 16);
 Dialog.addNumber("Camera pixel size (µm):", 6.5);
 if (nr_timepoints > 1) {
-	Dialog.addNumber("Timelapse interval:", 30);	
+	Dialog.addNumber("Timelapse interval:", 4);	
 	list_interval = newArray("sec","min","h");
 	Dialog.addChoice("sec/min/h", list_interval, "sec");
 }

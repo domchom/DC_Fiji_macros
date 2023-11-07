@@ -1,7 +1,7 @@
 // This will add a gaussian blur to all the open movies in Fiji
 
 // Define the folder where processed images will be saved
-output_folder_path = "/Volumes/DOM_FIVE/159DCE/processed/raw_crop_edited/";
+output_folder_path = "/Volumes/DOM_FIVE/167=DELETE/processed/";
 
 // Define the sigma level
 sigma = 2.0; // Change this value to adjust the sigma level

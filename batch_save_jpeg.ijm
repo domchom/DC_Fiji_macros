@@ -1,5 +1,5 @@
 // Define the folder where processed images will be saved
-output_folder_path = "/Users/domchom/Documents/Bement_lab/Meeting_Notes:Slides/230726_committee-meeting/";
+output_folder_path = "/Users/domchom/Documents/Bement_lab/Meeting:conferences/!Conferences/2023_ASCB/movies/";
 
 while (nImages > 0) {
 	
@@ -11,8 +11,8 @@ while (nImages > 0) {
 	image_title_without_extension = substring(image_title, 0, dot_index); 
 	
 	// Define new filename
-	newFileName = image_title_without_extension + ".avi" ;
+	newFileName = image_title_without_extension + ".jpg" ;
 
-	saveAs("Avi",output_folder_path + newFileName);	
+	saveAs("JPEG",output_folder_path + newFileName);	
 	close();
 					}

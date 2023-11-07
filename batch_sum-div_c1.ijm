@@ -1,5 +1,5 @@
 // Define the folder where processed images will be saved
-output_folder_path = "/Volumes/T7/173DCE/LS/en_face/raw_bleach_corr_crop/kymo/FFT/";
+output_folder_path = "/Users/domchom/Documents/Bement_lab/Meeting:conferences/!Conferences/2023_ASCB/movies/";
 
 while (nImages > 0) {
 	getDimensions(width, height, channels, slices, frames) ;		
@@ -10,25 +10,12 @@ while (nImages > 0) {
 	imageName = getInfo("image.filename") ; 
 	dotIndex = indexOf(imageName, ".");  
 	fileNameWithoutExtension = substring(imageName, 0, dotIndex); 
-	newFileName = fileNameWithoutExtension + "_FFT_correct" + ".tif" ;
+	newFileName = fileNameWithoutExtension + "_div-by-sum" + ".tif" ;
 	
-	run("Split Channels");
-	selectWindow("C1-"+fileName);
 	rename("C1");
-	run("FFT");
-	waitForUser("Select contaminants for " + fileName);
-	
-
-	run("Create Mask");
-	run("Invert");
-	run("Gaussian Blur...", "sigma=2");
-	selectWindow("C1");
-	run("Custom Filter...", "filter=Mask process");
-	
-	selectWindow("C2-"+fileName);
-	rename("C2");
-	
-	run("Merge Channels...", "c1=C1 c2=C2 create");
+	run("Z Project...", "projection=[Sum Slices]");
+	imageCalculator("Divide create 32-bit stack", "C1","SUM_C1");
+	rename("C1_result");
 	
 	saveAs("Tiff", output_folder_path + newFileName);
 	close();

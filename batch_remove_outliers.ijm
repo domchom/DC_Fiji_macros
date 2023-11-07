@@ -1,4 +1,4 @@
-output_folder_path = "/Volumes/DOM_FIVE/159DCE/processed/raw_crop_edited/";
+output_folder_path = "/Users/domchom/Desktop/";
 
 while (nImages > 0) {
 	
@@ -10,7 +10,7 @@ while (nImages > 0) {
 	fileNameWithoutExtension = substring(fileName, 0, dotIndex); 
 	newFileName = fileNameWithoutExtension + "_removed_outliers.tif" ;
 
-	run("Remove Outliers...", "radius=2 threshold=200 which=Bright stack");
+	run("Remove Outliers...", "radius=2 threshold=5 which=Bright stack");
 	saveAs("Tiff", output_folder_path + newFileName);
 	close();
 

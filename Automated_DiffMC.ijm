@@ -1,8 +1,8 @@
 //This macro creates difference movies from multi-channel movies
-differenceNumber = 8;
+differenceNumber = 4;
 
 // Define the folder where processed images will be saved
-output_folder_path = "/Volumes/T7/013IHE_Ect2-ROCK-mutants-take3/processed/raw_crop_diff/";
+output_folder_path = "/Volumes/T7/!Ect2_titration/169_172_174_175_combined/raw_crop/not-for-analysis/diff/";
 
 while (nImages > 0) {
 	getDimensions(width, height, channels, slices, frames) ;		
@@ -10,7 +10,7 @@ while (nImages > 0) {
 	fileName = getInfo("image.title"); 
 	//gets and saves the file name for later
 	
-	imageName = getInfo("image.filename") ; 
+	imageName = getInfo("image.filename"); 
 	dotIndex = indexOf(imageName, ".");  
 	fileNameWithoutExtension = substring(imageName, 0, dotIndex); 
 	newFileName = fileNameWithoutExtension + "_diff" + differenceNumber + ".tif" ;

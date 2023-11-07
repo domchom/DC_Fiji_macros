@@ -1,5 +1,5 @@
 // Define the folder where processed images will be saved
-output_folder_path = "/Users/domchom/Desktop/143/raw/";
+output_folder_path = "/Volumes/T7/168DCE_Rho-IT-waves/processed/raw_3dReg/";
 
 while (nImages > 0) {
 
