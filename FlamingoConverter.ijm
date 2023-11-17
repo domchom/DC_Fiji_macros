@@ -207,7 +207,7 @@ if (nr_timepoints > 1) {
 Dialog.addMessage("Select output options:");
 Dialog.addCheckbox("Save stack", false);
 Dialog.addCheckbox("Save projection", true);
-Dialog.addCheckbox("Save preview", true);
+Dialog.addCheckbox("Save preview", false);
 Dialog.addMessage("Select preview options (if applicable):");
 list_previewscale = newArray("1.00","0.75","0.50","0.25","0.10");
 Dialog.addChoice("Output scale", list_previewscale, "0.25");

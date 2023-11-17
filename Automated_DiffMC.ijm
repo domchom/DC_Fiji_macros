@@ -1,8 +1,8 @@
 //This macro creates difference movies from multi-channel movies
-differenceNumber = 4;
+differenceNumber = 8;
 
 // Define the folder where processed images will be saved
-output_folder_path = "/Volumes/T7/!Ect2_titration/169_172_174_175_combined/raw_crop/not-for-analysis/diff/";
+output_folder_path = "/Volumes/T7/!tagged_Ect2/!combined_for_analysis_SFC/raw_dbs_crop_diff/";
 
 while (nImages > 0) {
 	getDimensions(width, height, channels, slices, frames) ;		

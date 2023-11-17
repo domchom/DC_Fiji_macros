@@ -24,6 +24,8 @@ while (nImages > 0) {
 	selectImage("C1-" + imageName);
 	
 	run("Gaussian Blur...", "sigma=3 stack");
+	selectImage("C2-" + imageName);
+	run("Gaussian Blur...", "sigma=3 stack");
 	run("Merge Channels...", "c1=C1-" + imageName + " c2=C2-" + imageName + " create");
 	
 	

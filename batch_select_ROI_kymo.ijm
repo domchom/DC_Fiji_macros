@@ -1,7 +1,7 @@
 // This script crops all open images to the user-selected ROI and saves them as TIFF files in a specified folder.
 
 // Define the folder where cropped images will be saved
-output_folder_path = "/Volumes/T7/173DCE/LS/en_face/raw_bleach_corr_crop_diff/kymo/";
+output_folder_path = "/Users/domchom/Documents/Bement_lab/Meeting:conferences/!Conferences/2023_ASCB/movies/titration/";
 
 while (nImages > 0) {
 	// Get the name of the current image

@@ -1,5 +1,5 @@
 // Define the folder where cropped images will be saved
-output_folder_path = "/Volumes/T7/168DCE_Rho-IT-waves/processed/raw_3dReg_crop/";
+output_folder_path = "/Volumes/T7/178DCE/178DCE-LS/raw_crop/";
 
 while (nImages > 0) {
 

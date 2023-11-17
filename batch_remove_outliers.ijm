@@ -1,4 +1,4 @@
-output_folder_path = "/Users/domchom/Desktop/";
+output_folder_path = "/Volumes/T7/178DCE/178DCE-SFC/processed/raw_div-by-sum/";
 
 while (nImages > 0) {
 	

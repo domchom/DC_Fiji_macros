@@ -1,5 +1,5 @@
 // Define the folder where processed images will be saved
-output_folder_path = "/Volumes/T7/173DCE_tagged-Ect2_waves/LS/side/raw/kymo_1width/";
+output_folder_path = "/Volumes/T7/!tagged_Ect2/!combined_for_analysis_SFC/raw_dbs/";
 
 while (nImages > 0) {
 	getDimensions(width, height, channels, slices, frames) ;		
@@ -10,27 +10,28 @@ while (nImages > 0) {
 	imageName = getInfo("image.filename") ; 
 	dotIndex = indexOf(imageName, ".");  
 	fileNameWithoutExtension = substring(imageName, 0, dotIndex); 
-	newFileName = fileNameWithoutExtension + "_FFT_correct" + ".tif" ;
+	newFileName = fileNameWithoutExtension + "_div-by-sum" + ".tif" ;
 	
 	run("Split Channels");
 	selectWindow("C1-"+fileName);
 	rename("C1");
-	run("FFT");
-	waitForUser("Select contaminants for " + fileName);
-	
-
-	run("Create Mask");
-	run("Invert");
-	run("Gaussian Blur...", "sigma=2");
-	selectWindow("C1");
-	run("Custom Filter...", "filter=Mask process");
+	run("Z Project...", "projection=[Sum Slices]");
+	imageCalculator("Divide create 32-bit stack", "C1","SUM_C1");
+	rename("C1_result");
+	run("16-bit");
 	
 	selectWindow("C2-"+fileName);
 	rename("C2");
+	run("Z Project...", "projection=[Sum Slices]");
+	imageCalculator("Divide create 32-bit stack", "C2","SUM_C2");
+	rename("C2_result");
+	run("16-bit");
 	
-	run("Merge Channels...", "c1=C1 c2=C2 create");
+	run("Merge Channels...", "c1=C1_result c2=C2 create");
 	
 	saveAs("Tiff", output_folder_path + newFileName);
+	close();
+	close();
 	close();
 	close();
 	close();
