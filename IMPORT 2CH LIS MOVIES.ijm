@@ -1,5 +1,5 @@
-input_folder_path = "/Volumes/T7/180DCE_200v1000_Rho-IT_waves_LS/20231116_160045_180DCE_1000ngEct2_mChrGBD_GFPITRho_cell6_pseduoXSection/_projection/";
-output_folder_path = "/Volumes/T7/180DCE_200v1000_Rho-IT_waves_LS/";
+input_folder_path = "/Volumes/T7/181DCE_tagged_Ect2/LS/scope_folders/20231117_134740_181DCE_2xmChEct2dNLS_GFPUtrCH_1500ng_cell9_enface_20min/_projection/";
+output_folder_path = "/Volumes/T7/181DCE_tagged_Ect2/LS/processed/";
 
 File.openSequence(input_folder_path, " filter=C01");
 rename("C01.tif");

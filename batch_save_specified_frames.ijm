@@ -1,8 +1,8 @@
 // Define the folder where cropped images will be saved
-output_folder_path = "/Volumes/DOM_FIVE/159DCE/processed/raw_crop_trimmed/";
+output_folder_path = "/Users/domchom/Documents/Bement_lab/Meeting:conferences/!Lab_Meetings/231120_tagged-Ect2_waves/";
 
-beginning_frame = 15;
-end_frame = 1000000000; // set the end frame to a large number if want all frames at end
+beginning_frame = 1;
+end_frame = 1; // set the end frame to a large number if want all frames at end
 
 for (i = 0; nImages > 0; i++) {
 		

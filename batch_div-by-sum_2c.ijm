@@ -1,5 +1,5 @@
 // Define the folder where processed images will be saved
-output_folder_path = "/Volumes/T7/!tagged_Ect2/!combined_for_analysis_SFC/raw_dbs/";
+output_folder_path = "/Volumes/T7/181DCE_tagged_Ect2_sfc/processed/raw_dvs/";
 
 while (nImages > 0) {
 	getDimensions(width, height, channels, slices, frames) ;		
