@@ -2,7 +2,7 @@
 //so this script only works for saving the first channel and not the sceond
 
 // Define the folder where cropped images will be saved
-output_folder_path = "/Users/domchom/Documents/Bement_lab/Meeting:conferences/!Conferences/2023_ASCB/movies/Other GEFs/";
+output_folder_path = "/Users/domchom/Documents/Bement_lab/Meeting:conferences/!Seminars/240312_CBSG/movies/200v1000ng-Ect2_RhoGTP_F-actin/";
 
 while (nImages > 0) {
 

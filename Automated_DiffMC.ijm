@@ -2,7 +2,7 @@
 differenceNumber = 8;
 
 // Define the folder where processed images will be saved
-output_folder_path = "/Volumes/T7/!tagged_Ect2/178DCE_Utr-only/178DCE-SFC/processed/raw_div-by-sum_crop_diff/";
+output_folder_path = "/Users/domchom/Documents/Bement_lab/Meeting:conferences/!Seminars/240312_CBSG/movies/tagged_Ect2/";
 
 while (nImages > 0) {
 	getDimensions(width, height, channels, slices, frames) ;		

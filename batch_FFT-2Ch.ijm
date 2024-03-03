@@ -1,5 +1,5 @@
 // Define the folder where processed images will be saved
-output_folder_path = "/Volumes/T7/177DCE_tagged-Ect2/LS/raw_div-sum/";
+output_folder_path = "/Users/domchom/Documents/Bement_lab/Papers/Rho-IT_waves_paper/data/Frog_Rho-IT_rGBD/x-section/LS/";
 
 while (nImages > 0) {
 	getDimensions(width, height, channels, slices, frames) ;		

@@ -1,5 +1,5 @@
 // Define the folder where processed images will be saved
-output_folder_path = "/Volumes/T7/!Rho-IT/180DCE_200v1000_Rho-IT_waves_LS/processed/raw_3dReg/";
+output_folder_path = "/Volumes/DOM_FIVE/!Rho-IT_waves/pooled for analysis/side/";
 
 while (nImages > 0) {
 

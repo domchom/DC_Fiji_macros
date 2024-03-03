@@ -1,5 +1,5 @@
 // Define the folder where processed images will be saved
-output_folder_path = "/Users/domchom/processed/raw_bleach_correction/";
+output_folder_path = "/Volumes/T7/196DCE_240207_Rho-IT_waves-mCh-SFC/processed/raw_dbs/";
 
 while (nImages > 0) {
 	getDimensions(width, height, channels, slices, frames) ;		

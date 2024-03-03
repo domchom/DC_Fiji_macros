@@ -1,5 +1,5 @@
 // Define the folder where processed images will be saved
-output_folder_path = "/Volumes/T7/181DCE_tagged_Ect2_sfc/processed/raw_dvs/";
+output_folder_path = "/Users/domchom/Documents/Bement_lab/Meeting:conferences/!Seminars/240312_CBSG/movies/200v1000ng-Ect2_RhoGTP_F-actin/";
 
 while (nImages > 0) {
 	getDimensions(width, height, channels, slices, frames) ;		
@@ -13,6 +13,7 @@ while (nImages > 0) {
 	newFileName = fileNameWithoutExtension + "_div-by-sum" + ".tif" ;
 	
 	run("Split Channels");
+	
 	selectWindow("C1-"+fileName);
 	rename("C1");
 	run("Z Project...", "projection=[Sum Slices]");
@@ -27,7 +28,7 @@ while (nImages > 0) {
 	rename("C2_result");
 	run("16-bit");
 	
-	run("Merge Channels...", "c1=C1_result c2=C2 create");
+	run("Merge Channels...", "c1=C1_result c2=C2_result create");
 	
 	saveAs("Tiff", output_folder_path + newFileName);
 	close();
