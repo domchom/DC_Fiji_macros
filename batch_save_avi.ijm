@@ -1,5 +1,5 @@
 // Define the folder where processed images will be saved
-output_folder_path = "/Users/domchom/Documents/Bement_lab/Meeting:conferences/!Seminars/240312_CBSG/movies/other_GEFs/";
+output_folder_path = "/Users/domchom/Documents/Bement_lab/Meeting:conferences/!Seminars/240312_CBSG/movies/chen_mutants/";
 
 while (nImages > 0) {
 	
