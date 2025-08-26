@@ -1,7 +1,7 @@
 // This script crops all open images to the user-selected ROI and saves them as TIFF files in a specified folder.
 
 // Define the folder where cropped images will be saved
-output_folder_path = "/Volumes/DOM_FIVE/!analysis/200ng v 1000ng Ect2 rGBD Utr analysis/141DCE_143DCE_147DCE_149DCE_158DCE_161DCE/kymo/";
+output_folder_path = "/Volumes/DOM_SEVEN/298DCE_250821_xEct2-tagged_WTvWA-SFC/!processed_images/raw_crop/";
 
 while (nImages > 0) {
 	// Get the name of the current image
@@ -10,20 +10,19 @@ while (nImages > 0) {
 	dotIndex = indexOf(fileName, ".");  
 	//this and the following line get the file name without the extension
 	fileNameWithoutExtension = substring(fileName, 0, dotIndex); 
-	newFileName = fileNameWithoutExtension + "_kymo.tif" ;
+	newFileName = fileNameWithoutExtension + "_crop.tif" ;
 	
 	// start the animation of the movie
-	run("Animation Options...", "speed=40");
+	run("Animation Options...", "speed=75");
 	doCommand("Start Animation [\\]");
 
-	waitForUser("Select the ROI for " + fileName);
+	waitForUser("Select the ROI for to crop");
 	selectWindow(fileName);
 	
 	//crop the image to the ROI
-	run("Reslice [/]...", "output=1.000 slice_count=1 avoid");;
+	run("Crop");
+	run("Animation Options...", "speed=30");
 	saveAs("Tiff", output_folder_path + newFileName);
 	close();
-	close();
-
 
 }

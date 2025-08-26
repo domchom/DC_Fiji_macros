@@ -1,6 +1,6 @@
 //This script changes the animation speed of all movies already opened in Fiji and saves them
 
-animation_speed = 50
+animation_speed = 30;
 
 while (nImages > 0) {
 

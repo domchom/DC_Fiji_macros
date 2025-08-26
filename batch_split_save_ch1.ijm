@@ -2,7 +2,7 @@
 //so this script only works for saving the first channel and not the sceond
 
 // Define the folder where cropped images will be saved
-output_folder_path = "/Volumes/DOM_LS/129DCE_230316_Rho-IT-waves-SFC/processed/t-series/raw_crop/";
+output_folder_path = "/Users/domchom/Desktop/test_waveAnalysis/standard/";
 
 while (nImages > 0) {
 

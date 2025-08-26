@@ -1,5 +1,5 @@
 // Define the folder where processed images will be saved
-output_folder_path = "/Users/domchom/Documents/Bement_lab/Papers/Rho-IT_waves_paper/data/sup_data/";
+output_folder_path = "/Users/domchom/Documents/Bement_lab/Papers/Rho-IT_waves/data/sup_data/66v166_waves/";
 
 while (nImages > 0) {
 	

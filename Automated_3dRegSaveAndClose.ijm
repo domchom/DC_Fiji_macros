@@ -1,5 +1,5 @@
 // Define the folder where processed images will be saved
-output_folder_path = "/Volumes/DOM_FIVE/!Rho-IT_waves/pooled for analysis/side/";
+output_folder_path = "/Users/domchom/Desktop/test/";
 
 while (nImages > 0) {
 

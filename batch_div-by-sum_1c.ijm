@@ -1,5 +1,5 @@
 // Define the folder where processed images will be saved
-output_folder_path = "/Users/domchom/Documents/Bement_lab/Papers/Rho-IT_waves_paper/data/sup_data/";
+output_folder_path = "/Volumes/T7/!Ect2-delBRCT/239DCE_241002_xEct2-BRCTdel_SFC/!processed_images/raw_dbs/";
 
 while (nImages > 0) {
 	getDimensions(width, height, channels, slices, frames) ;		
