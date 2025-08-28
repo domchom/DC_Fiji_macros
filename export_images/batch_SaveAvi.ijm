@@ -15,4 +15,4 @@ while (nImages > 0) {
 
 	saveAs("Avi",output_folder_path + newFileName);	
 	close();
-					}
+}

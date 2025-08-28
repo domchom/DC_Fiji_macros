@@ -1,8 +1,8 @@
 //This macro creates difference movies from multi-channel movies
-differenceNumber = 18;
+differenceNumber = 8;
 
 // Define the folder where processed images will be saved
-output_folder_path = "/Volumes/DOM_SEVEN/298DCE_250821_xEct2-tagged_WTvWA-SFC/!processed_images/raw_crop_diff18/";
+output_folder_path = "/Volumes/DOM_SEVEN/299DCE_250827_xEct2-tagged_WTvGEFdead-SFC/!processed_images/raw_crop_diff/";
 
 while (nImages > 0) {
 	getDimensions(width, height, channels, slices, frames) ;		

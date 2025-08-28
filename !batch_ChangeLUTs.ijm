@@ -1,7 +1,7 @@
 // Define LUTs for each channel
 ch1_lut = "Red";
-ch2_lut = "Red";
-ch3_lut = "Cyan";
+ch2_lut = "Cyan";
+ch3_lut = "Green";
 ch4_lut = "Magenta";
 
 luts = newArray(ch1_lut, ch2_lut, ch3_lut, ch4_lut);
@@ -29,7 +29,7 @@ while (nImages > 0) {
 	    for (c = 1; c <= channels; c++) {
 	        Stack.setChannel(c);
 	
-			run(luts[c]);
+			run(luts[c - 1]);
 	        // Enhance contrast and reset intensity range
 	        run("Enhance Contrast", "saturated=0.35");
 	        resetMinAndMax();

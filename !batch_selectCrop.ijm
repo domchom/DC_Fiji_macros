@@ -1,7 +1,7 @@
 // This script crops all open images to the user-selected ROI and saves them as TIFF files in a specified folder.
 
 // Define the folder where cropped images will be saved
-output_folder_path = "/Volumes/DOM_SEVEN/298DCE_250821_xEct2-tagged_WTvWA-SFC/!processed_images/raw_crop/";
+output_folder_path = "/Volumes/DOM_SEVEN/299DCE_250827_xEct2-tagged_WTvGEFdead-SFC/!processed_images/raw_crop/";
 
 while (nImages > 0) {
 	// Get the name of the current image
