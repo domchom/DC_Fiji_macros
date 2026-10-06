@@ -1,4 +1,4 @@
-// batch_Export.ijm
+// !batch_Export.ijm
 // Exports every open image as TIFF, JPEG or AVI: the whole (merged) image and/or
 // the selected channels as separate grayscale files.
 // JPEG saves the current frame only; AVI saves the whole movie.
