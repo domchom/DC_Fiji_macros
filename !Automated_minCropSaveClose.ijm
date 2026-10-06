@@ -1,5 +1,5 @@
 // Define the folder where cropped images will be saved
-output_folder_path = "/Users/domchom/Desktop/test/";
+output_folder_path = "/Volumes/DOM_SEVEN/384DCE_260731_PI-kinase-test_SFC/!processed_images/raw_reg_min/";
 
 while (nImages > 0) {
 
@@ -18,7 +18,7 @@ while (nImages > 0) {
 
     } 
 	
-	setThreshold(1, 65535);
+	setThreshold(0, 1);
 	run("Convert to Mask");
 	run("Analyze Particles...", "add");
 	selectWindow(fileName);

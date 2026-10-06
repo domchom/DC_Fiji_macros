@@ -1,5 +1,5 @@
 // Define the folder where processed images will be saved
-output_folder_path = "/Users/domchom/Desktop/test/";
+output_folder_path = "/Volumes/DOM_SEVEN/2026AugBillData/080726_Pm-PLCPH-Ect2/";
 
 while (nImages > 0) {
 
@@ -16,10 +16,10 @@ while (nImages > 0) {
 
 	Stack.setDisplayMode("composite");
 	Stack.setChannel(1);
-	run("Magenta");
+	run("Red");
 	run("Enhance Contrast", "saturated=0.15");
 	Stack.setChannel(2);
-	run("Green");
+	run("Cyan");
 	run("Enhance Contrast", "saturated=0.15");
 	
 	saveAs("Tiff", output_folder_path + newFileName);	

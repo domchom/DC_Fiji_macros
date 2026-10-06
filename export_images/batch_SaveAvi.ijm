@@ -1,5 +1,5 @@
 // Define the folder where processed images will be saved
-output_folder_path = "/Users/domchom/Documents/Bement_lab/Meetings:Conferences/!Conferences/2412_ASCB/presentation/movies/PD-CK/";
+output_folder_path = "/Volumes/DOM_EIGHT/LS_tests/260707/!processed_images/avi/";
 
 while (nImages > 0) {
 	

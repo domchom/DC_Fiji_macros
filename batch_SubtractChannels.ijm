@@ -1,9 +1,9 @@
 // Define the folder where processed images will be saved
-output_folder_path = "/Users/domchom/Desktop/test/";
+output_folder_path = "/Volumes/DOM_SEVEN/376DCE_260707_embryo_controlvWTvWA_SFC/!processed_images/raw_c1-c2/";
 
 //Note that the resulting image is saved to the final channel (so channel for a initally 4 channel image)
-subtract_from_Ch = 2;
-what_to_subtract = 1;
+subtract_from_Ch = 1;
+what_to_subtract = 2;
 
 while (nImages > 0) {
 	getDimensions(width, height, channels, slices, frames);		

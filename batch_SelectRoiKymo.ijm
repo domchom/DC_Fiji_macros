@@ -1,7 +1,7 @@
 // This script crops all open images to the user-selected ROI and saves them as TIFF files in a specified folder.
 
 // Define the folder where cropped images will be saved
-output_folder_path = "/Volumes/DOM_FIVE/!analysis/200ng v 1000ng Ect2 rGBD Utr analysis/141DCE_143DCE_147DCE_149DCE_158DCE_161DCE/kymo/";
+output_folder_path = "/Volumes/DOM_SEVEN/369DCE_260617_xEct2-tagged_test-SFC/med/!processed_images/raw_crop_diff/1width-kymo/";
 
 while (nImages > 0) {
 	// Get the name of the current image

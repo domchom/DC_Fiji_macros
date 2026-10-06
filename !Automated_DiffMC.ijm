@@ -1,22 +1,25 @@
 //This macro creates difference movies from multi-channel movies
-differenceNumber = 8;
+differenceNumber = 12;
 
 // Define the folder where processed images will be saved
-output_folder_path = "/Volumes/DOM_SEVEN/299DCE_250827_xEct2-tagged_WTvGEFdead-SFC/!processed_images/raw_crop_diff/";
+output_folder_path = "/Volumes/DOM_SEVEN/!Ect2-FL-tagged-waves-vs-PIPs/!combined/raw_crop_diff/";
 
 while (nImages > 0) {
 	getDimensions(width, height, channels, slices, frames) ;		
 	//gets and saves the movie dimensions for later use
-	fileName = getInfo("image.title"); 
+	fileName = getTitle();
 	//gets and saves the file name for later
 	
-	imageName = getInfo("image.filename"); 
-	dotIndex = indexOf(imageName, ".");  
-	fileNameWithoutExtension = substring(imageName, 0, dotIndex); 
+	title = getTitle();
+	dotIndex = lastIndexOf(title, ".");
+	if (dotIndex < 0) dotIndex = lengthOf(title);
+	fileNameWithoutExtension = substring(title, 0, dotIndex);
 	newFileName = fileNameWithoutExtension + "_diff" + differenceNumber + ".tif" ;
 
 	counter = 1 ;//creates a counter variable that starts as 1 and increases by 1 with every trip through the loop
 	while (counter <= channels) {  //runs a loop as long as the there are still channels left to duplicate
+		
+		run("16-bit");
 		Stack.setChannel(counter); //moves to channel x (whatever the x number through the loop is)
 		run("Duplicate...", "title=Channel_" + counter + " duplicate channels=" + counter);
 		//duplicates the active channel and renames it "Channel_X"

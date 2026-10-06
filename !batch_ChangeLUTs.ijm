@@ -14,7 +14,6 @@ while (nImages > 0) {
     fileName = getInfo("image.title"); 	
 	imageName = getInfo("image.filename"); 
 	selectWindow(fileName);
-    Stack.setDisplayMode("composite");
 	
 	// Special case: if only one channel, force grayscale
     if (channels == 1) {
@@ -26,12 +25,17 @@ while (nImages > 0) {
     } 
     else {
 	    // Loop through all channels
+	    Stack.setDisplayMode("composite");
 	    for (c = 1; c <= channels; c++) {
 	        Stack.setChannel(c);
+	        // run("Enhance Contrast", "saturated=0.35");
+	        // Stack.setSlice(10);
 	
 			run(luts[c - 1]);
 	        // Enhance contrast and reset intensity range
-	        run("Enhance Contrast", "saturated=0.35");
+	        //if (c == 1) {
+	        //	run("Enhance Contrast", "saturated=0.35");
+	        //}
 	        resetMinAndMax();
 	    }
     }    

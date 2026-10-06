@@ -1,5 +1,5 @@
 // Define the folder where cropped images will be saved
-output_folder_path = "/Users/domchom/Desktop/test/";
+output_folder_path = "/Volumes/DOM_SEVEN/374DCE_260702_embryo_CONTvWTvWA-1ng_SFC-FV/374DCE_260702_embryo_CONTvWTvWA-1ng_SFC/!processed_images/";
 
 channel_to_save = 1;
 

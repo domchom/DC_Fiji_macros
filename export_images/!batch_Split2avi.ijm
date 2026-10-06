@@ -1,5 +1,5 @@
 // Define the folder where cropped images will be saved
-output_folder_path = "/Users/domchom/Documents/Bement_lab/Meetings:Conferences/!Lab_Meetings/250303_xEct2-tagged-W337A/";
+output_folder_path = "/Volumes/DOM_SIX/!dom_analysis/taggedPKN/";
 
 while (nImages > 0) {
 

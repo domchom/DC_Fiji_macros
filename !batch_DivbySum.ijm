@@ -1,5 +1,5 @@
 // Define the folder where processed images will be saved
-output_folder_path = "/Users/domchom/Desktop/test/";
+output_folder_path = "/Volumes/DOM_SEVEN/387-389_combined/raw_dbs/";
 
 while (nImages > 0) {
 	getDimensions(width, height, channels, slices, frames) ;		

@@ -1,7 +1,7 @@
 // This will add a gaussian blur to all the open movies in Fiji
 
 // Define the folder where processed images will be saved
-output_folder_path = "/Volumes/DOM_FIVE/167DCE/Lightsheet_processed/raw_corp_diff_gauss/";
+output_folder_path = "/Volumes/DOM_SEVEN/404DCE_260930_xEct2-atgged_PIPs_SFC/!processed_images/raw_diff_blur/";
 
 // Define the sigma level
 sigma = 3.0; // Change this value to adjust the sigma level

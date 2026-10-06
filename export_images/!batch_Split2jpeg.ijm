@@ -1,5 +1,5 @@
 // Define the folder where cropped images will be saved
-output_folder_path = "/Users/domchom/Desktop/test/";
+output_folder_path = "/Volumes/DOM_EIGHT/pos-feedback-paper-data/260824-figureFiles/Fig5_GEF4A/";
 
 while (nImages > 0) {
 
