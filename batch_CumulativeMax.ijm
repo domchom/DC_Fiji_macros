@@ -1,52 +1,45 @@
-// !Automated_DiffMC.ijm
-// Makes difference movies: for each selected channel, frame t+N minus frame t.
-// Negative values are clipped to 0 and the result is saved as 16-bit.
-// Unselected channels are left out of the output.
+// batch_CumulativeMax.ijm
+// Builds a cumulative max projection of the selected channels of every open image:
+// slice i becomes the max of slices 1..i.
 //
-// Usage:  open the movies, edit the parameters below, run.
-// Output: <name>_diff<N>.tif
+// Usage:  open the images, edit the parameters below, run.
+// Output: <name>_cumMax.tif
 
 // ===== PARAMETERS =====
-output_folder_path  = "/Volumes/DOM_SEVEN/!Ect2-FL-tagged-waves-vs-PIPs/!combined/raw_crop_diff/"; // "" = ask
+output_folder_path  = "/Volumes/DOM_SEVEN/402DCE_260922_C1-488phal_C2-568-pMyo_FV/!processed_images/CummulativeMaxProject/"; // "" = ask
 channels_to_process = "all";   // "all" or a list, e.g. "1,3"
-difference_number   = 12;      // N, in frames
 // ======================
 
 output_folder_path = prepareOutputFolder(output_folder_path);
+setBatchMode(true);
 
 while (nImages > 0) {
 	otherIDs = getOtherImageIDs();
 	baseName = getBaseName(getTitle());
 
 	nCh = splitChannels();
-	results = newArray(0);
 	for (c = 1; c <= nCh; c++) {
 		if (!isChannelSelected(channels_to_process, c)) continue;
-		selectWindow("__ch" + c);
-		n = nSlices;
-		duplicateRange("__late", difference_number + 1, n);
-		selectWindow("__ch" + c);
-		duplicateRange("__early", 1, n - difference_number);
-		imageCalculator("Subtract create 32-bit stack", "__late", "__early");
-		rename("__diff" + c);
-		setMinAndMax(0, 65536);
-		run("16-bit");
-		run("Enhance Contrast", "saturated=0.35");
-		close("__late");
-		close("__early");
-		results = Array.concat(results, "__diff" + c);
+		name = "__ch" + c;
+		selectWindow(name);
+		for (i = 2; i <= nSlices; i++) {
+			setSlice(i - 1);
+			run("Duplicate...", "title=__prev");
+			selectWindow(name);
+			setSlice(i);
+			imageCalculator("Max", name, "__prev");
+			close("__prev");
+			selectWindow(name);
+		}
 	}
-	mergeChannels(results);
+	mergeChannels(channelNames(nCh));
 
-	saveAs("Tiff", output_folder_path + baseName + "_diff" + difference_number + ".tif");
+	Stack.setSlice(1);
+	saveAs("Tiff", output_folder_path + baseName + "_cumMax.tif");
 	closeAllExcept(otherIDs);
 }
 
-// Duplicates slices/frames first..last of the active single-channel stack.
-function duplicateRange(newTitle, first, last) {
-	if (Stack.isHyperstack) run("Duplicate...", "title=" + newTitle + " duplicate frames=" + first + "-" + last);
-	else run("Duplicate...", "title=" + newTitle + " duplicate range=" + first + "-" + last);
-}
+setBatchMode(false);
 
 
 // ===== HELPERS =====

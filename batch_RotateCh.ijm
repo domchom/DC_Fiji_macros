@@ -1,15 +1,14 @@
-// !Automated_DiffMC.ijm
-// Makes difference movies: for each selected channel, frame t+N minus frame t.
-// Negative values are clipped to 0 and the result is saved as 16-bit.
-// Unselected channels are left out of the output.
+// batch_RotateCh.ijm
+// Rotates the selected channels 90 degrees, then crops every channel to the same
+// top-left square (side = min(width, height)) so they can be merged again.
 //
-// Usage:  open the movies, edit the parameters below, run.
-// Output: <name>_diff<N>.tif
+// Usage:  open the images, edit the parameters below, run.
+// Output: <name>_rotated.tif
 
 // ===== PARAMETERS =====
-output_folder_path  = "/Volumes/DOM_SEVEN/!Ect2-FL-tagged-waves-vs-PIPs/!combined/raw_crop_diff/"; // "" = ask
-channels_to_process = "all";   // "all" or a list, e.g. "1,3"
-difference_number   = 12;      // N, in frames
+output_folder_path  = "/Users/domchom/Desktop/test/"; // "" = ask
+channels_to_process = "2";       // "all" or a list, e.g. "1,3"
+direction           = "Right";   // "Right" or "Left"
 // ======================
 
 output_folder_path = prepareOutputFolder(output_folder_path);
@@ -17,35 +16,19 @@ output_folder_path = prepareOutputFolder(output_folder_path);
 while (nImages > 0) {
 	otherIDs = getOtherImageIDs();
 	baseName = getBaseName(getTitle());
+	size = minOf(getWidth(), getHeight());
 
 	nCh = splitChannels();
-	results = newArray(0);
 	for (c = 1; c <= nCh; c++) {
-		if (!isChannelSelected(channels_to_process, c)) continue;
 		selectWindow("__ch" + c);
-		n = nSlices;
-		duplicateRange("__late", difference_number + 1, n);
-		selectWindow("__ch" + c);
-		duplicateRange("__early", 1, n - difference_number);
-		imageCalculator("Subtract create 32-bit stack", "__late", "__early");
-		rename("__diff" + c);
-		setMinAndMax(0, 65536);
-		run("16-bit");
-		run("Enhance Contrast", "saturated=0.35");
-		close("__late");
-		close("__early");
-		results = Array.concat(results, "__diff" + c);
+		if (isChannelSelected(channels_to_process, c)) run("Rotate 90 Degrees " + direction);
+		makeRectangle(0, 0, size, size);
+		run("Crop");
 	}
-	mergeChannels(results);
+	mergeChannels(channelNames(nCh));
 
-	saveAs("Tiff", output_folder_path + baseName + "_diff" + difference_number + ".tif");
+	saveAs("Tiff", output_folder_path + baseName + "_rotated.tif");
 	closeAllExcept(otherIDs);
-}
-
-// Duplicates slices/frames first..last of the active single-channel stack.
-function duplicateRange(newTitle, first, last) {
-	if (Stack.isHyperstack) run("Duplicate...", "title=" + newTitle + " duplicate frames=" + first + "-" + last);
-	else run("Duplicate...", "title=" + newTitle + " duplicate range=" + first + "-" + last);
 }
 
 

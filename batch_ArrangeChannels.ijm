@@ -1,51 +1,47 @@
-// !Automated_DiffMC.ijm
-// Makes difference movies: for each selected channel, frame t+N minus frame t.
-// Negative values are clipped to 0 and the result is saved as 16-bit.
-// Unselected channels are left out of the output.
+// batch_ArrangeChannels.ijm
+// Reorders, swaps or removes channels of every open image.
+//   swap 1 and 2 (3-ch):  new_order = "213"
+//   remove channel 3:     new_order = "12"
+//   reverse (4-ch):       new_order = "4321"
 //
-// Usage:  open the movies, edit the parameters below, run.
-// Output: <name>_diff<N>.tif
+// Usage:  open the images, edit the parameters below, run.
+// Output: <name>_ch<new_order>.tif
 
 // ===== PARAMETERS =====
-output_folder_path  = "/Volumes/DOM_SEVEN/!Ect2-FL-tagged-waves-vs-PIPs/!combined/raw_crop_diff/"; // "" = ask
-channels_to_process = "all";   // "all" or a list, e.g. "1,3"
-difference_number   = 12;      // N, in frames
+output_folder_path = "/Volumes/DOM_SEVEN/!Ect2-FL-tagged-waves-vs-PIPs/!combined/ch1_PIPs_Ch2-Ect2/"; // "" = ask
+new_order = "21";
 // ======================
 
 output_folder_path = prepareOutputFolder(output_folder_path);
 
 while (nImages > 0) {
 	otherIDs = getOtherImageIDs();
-	baseName = getBaseName(getTitle());
+	title = getTitle();
+	baseName = getBaseName(title);
 
-	nCh = splitChannels();
-	results = newArray(0);
-	for (c = 1; c <= nCh; c++) {
-		if (!isChannelSelected(channels_to_process, c)) continue;
-		selectWindow("__ch" + c);
-		n = nSlices;
-		duplicateRange("__late", difference_number + 1, n);
-		selectWindow("__ch" + c);
-		duplicateRange("__early", 1, n - difference_number);
-		imageCalculator("Subtract create 32-bit stack", "__late", "__early");
-		rename("__diff" + c);
-		setMinAndMax(0, 65536);
-		run("16-bit");
-		run("Enhance Contrast", "saturated=0.35");
-		close("__late");
-		close("__early");
-		results = Array.concat(results, "__diff" + c);
+	getDimensions(w, h, nCh, s, f);
+	if (!orderFits(new_order, nCh)) {
+		print("Skipped (order " + new_order + " needs more than " + nCh + " channels): " + title);
+		closeAllExcept(otherIDs);
+		continue;
 	}
-	mergeChannels(results);
 
-	saveAs("Tiff", output_folder_path + baseName + "_diff" + difference_number + ".tif");
+	splitChannels();
+	names = newArray(lengthOf(new_order));
+	for (i = 0; i < lengthOf(new_order); i++) names[i] = "__ch" + substring(new_order, i, i + 1);
+	mergeChannels(names);
+	saveAs("Tiff", output_folder_path + baseName + "_ch" + new_order + ".tif");
 	closeAllExcept(otherIDs);
 }
 
-// Duplicates slices/frames first..last of the active single-channel stack.
-function duplicateRange(newTitle, first, last) {
-	if (Stack.isHyperstack) run("Duplicate...", "title=" + newTitle + " duplicate frames=" + first + "-" + last);
-	else run("Duplicate...", "title=" + newTitle + " duplicate range=" + first + "-" + last);
+// Returns true if every digit in order is a valid channel number (1..nCh).
+function orderFits(order, nCh) {
+	for (i = 0; i < lengthOf(order); i++) {
+		c = parseInt(substring(order, i, i + 1));
+		if (isNaN(c) || c < 1 || c > nCh) return false;
+	}
+	if (nCh < 2) return false;
+	return true;
 }
 
 
@@ -130,12 +126,4 @@ function mergeChannels(names) {
 	args = "";
 	for (i = 0; i < names.length; i++) args = args + "c" + (i + 1) + "=[" + names[i] + "] ";
 	run("Merge Channels...", args + "create");
-}
-
-// Returns true if channel c is in spec ("all" or a list such as "1,3").
-function isChannelSelected(spec, c) {
-	if (spec == "all") return true;
-	parts = split(spec, ", ");
-	for (i = 0; i < parts.length; i++) if (parseInt(parts[i]) == c) return true;
-	return false;
 }

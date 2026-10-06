@@ -1,12 +1,16 @@
-// Blind furrow-timing analysis for single-cell TIFFs.
-// Presents cells in randomized order, hides identity, records start/end frame,
-// computes the frame difference, and writes a key CSV + a score CSV.
-// Run with no image open; ROIs/active image not required.
-// ----- edit this -----
+// dissection-scope-div-time-blind.ijm
+// Blind furrow-timing analysis for single-cell TIFFs (e.g. from !batch_multiROImanageSave).
+// Presents cells in randomized order with their identity hidden, records start/end
+// frames, and writes a key CSV plus a score CSV. Re-running resumes where you left off.
+//
+// Usage:  edit the parameters below, run with no image open.
+// Output: blind_key.csv and furrow_scores.csv in outDir (join on blind_code to un-blind).
+
+// ===== PARAMETERS =====
 inDir  = "/Volumes/DOM_SEVEN/371DCE_260624_embryos-fix-Ect2-WTvWA/diseect_scope/frames1to134_single-cells copy/";
 outDir = inDir;          // where the CSVs are written; must end with a slash
 seed   = 69;             // KEEP CONSTANT for a given study so order/resume stay consistent
-// ---------------------
+// ======================
 
 if (!endsWith(inDir, "/"))  inDir  = inDir + "/";
 if (!endsWith(outDir, "/")) outDir = outDir + "/";
@@ -62,10 +66,7 @@ for (k = 0; k < total; k++) {
     if (dash > 0) group = substring(fname, 0, dash);
 
     open(inDir + fname);
-    run("In [+]");
-    run("In [+]");
-    run("In [+]");
-    run("In [+]"); // make the window larger
+    for (z = 0; z < 4; z++) run("In [+]");   // enlarge the window
     rename(code);                                  // hide identity in title bar
     Stack.getDimensions(w, h, ch, sl, fr);
     nFrames = sl; if (fr > sl) nFrames = fr;
@@ -103,6 +104,10 @@ print("Key:    " + keyPath);
 print("Scores: " + scorePath);
 print("Join on 'blind_code' to un-blind.");
 
+
+// ===== HELPERS =====
+
+// Returns 1 if val is in arr.
 function inArray(arr, val) {
     for (i = 0; i < arr.length; i++) if (arr[i] == val) return 1;
     return 0;

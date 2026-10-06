@@ -1,44 +1,57 @@
-// Define LUTs for each channel
-ch1_lut = "Red";
-ch2_lut = "Cyan";
-ch3_lut = "Green";
-ch4_lut = "Magenta";
+// !batch_ChangeLUTs.ijm
+// Applies per-channel LUTs and resets display ranges for every open image.
+// Single-channel images are set to Grays.
+// NOTE: overwrites the original files in place.
+//
+// Usage:  open the images, edit the parameters below, run.
 
-luts = newArray(ch1_lut, ch2_lut, ch3_lut, ch4_lut);
+// ===== PARAMETERS =====
+luts = newArray("Red", "Cyan", "Green", "Magenta");   // per channel; extra channels get Grays
+// ======================
 
-// Loop through all open images
 while (nImages > 0) {
+	otherIDs = getOtherImageIDs();
+	getDimensions(w, h, nCh, s, f);
 
-    getDimensions(width, height, channels, slices, frames);		
-    // Save movie dimensions for later use
-    fileName = getInfo("image.title"); 	
-	imageName = getInfo("image.filename"); 
-	selectWindow(fileName);
-	
-	// Special case: if only one channel, force grayscale
-    if (channels == 1) {
-        Stack.setChannel(1);
-        run("Grays");
-        run("Enhance Contrast", "saturated=0.35");
-        resetMinAndMax();
+	if (nCh == 1) {
+		run("Grays");
+		resetMinAndMax();
+	} else {
+		Stack.setDisplayMode("composite");
+		for (c = 1; c <= nCh; c++) {
+			Stack.setChannel(c);
+			if (c <= luts.length) run(luts[c - 1]);
+			else run("Grays");
+			resetMinAndMax();
+		}
+	}
 
-    } 
-    else {
-	    // Loop through all channels
-	    Stack.setDisplayMode("composite");
-	    for (c = 1; c <= channels; c++) {
-	        Stack.setChannel(c);
-	        // run("Enhance Contrast", "saturated=0.35");
-	        // Stack.setSlice(10);
-	
-			run(luts[c - 1]);
-	        // Enhance contrast and reset intensity range
-	        //if (c == 1) {
-	        //	run("Enhance Contrast", "saturated=0.35");
-	        //}
-	        resetMinAndMax();
-	    }
-    }    
-    run("Save");
-	close();
+	run("Save");
+	closeAllExcept(otherIDs);
+}
+
+
+// ===== HELPERS =====
+
+// Returns the IDs of every open image except the active one, which stays active.
+function getOtherImageIDs() {
+	activeID = getImageID();
+	ids = newArray(0);
+	for (i = 1; i <= nImages; i++) {
+		selectImage(i);
+		if (getImageID() != activeID) ids = Array.concat(ids, getImageID());
+	}
+	selectImage(activeID);
+	return ids;
+}
+
+// Closes every open image whose ID is not in keepIDs.
+function closeAllExcept(keepIDs) {
+	for (i = nImages; i >= 1; i--) {
+		selectImage(i);
+		id = getImageID();
+		keep = false;
+		for (k = 0; k < keepIDs.length; k++) if (keepIDs[k] == id) keep = true;
+		if (!keep) close();
+	}
 }

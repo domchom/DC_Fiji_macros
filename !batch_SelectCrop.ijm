@@ -1,15 +1,15 @@
-// batch_SelectRoiKymo.ijm
-// Interactive kymographs: plays each open movie, waits for you to draw a line,
-// then reslices along it to make a kymograph.
+// !batch_SelectCrop.ijm
+// Interactive crop: plays each open movie, waits for you to draw a selection,
+// then crops all channels/frames to it.
 //
-// Usage:  open the movies, edit the parameters below, run. Draw a line
-//         (set its width with a double-click on the line tool), click OK.
+// Usage:  open the movies, edit the parameters below, run. Draw a selection, click OK.
 //         Images with no selection are skipped (closed without saving).
-// Output: <name>_kymo.tif
+// Output: <name>_crop.tif
 
 // ===== PARAMETERS =====
-output_folder_path = "/Volumes/DOM_SEVEN/369DCE_260617_xEct2-tagged_test-SFC/med/!processed_images/raw_crop_diff/1width-kymo/"; // "" = ask
-preview_speed = 40;   // playback fps while choosing
+output_folder_path = "/Volumes/DOM_SEVEN/!Ect2-FL-tagged-waves-vs-PIPs/!combined/raw_crop/"; // "" = ask
+preview_speed = 55;   // playback fps while choosing
+saved_speed   = 30;   // playback fps stored in the saved file
 // ======================
 
 output_folder_path = prepareOutputFolder(output_folder_path);
@@ -22,14 +22,15 @@ while (nImages > 0) {
 
 	run("Animation Options...", "speed=" + preview_speed);
 	doCommand("Start Animation [\\]");
-	waitForUser("Draw the kymograph line for " + title);
+	waitForUser("Select the ROI to crop for " + title);
 	selectImage(inputID);
 
 	if (selectionType() == -1) {
 		print("Skipped (no selection): " + title);
 	} else {
-		run("Reslice [/]...", "output=1.000 slice_count=1 avoid");
-		saveAs("Tiff", output_folder_path + baseName + "_kymo.tif");
+		run("Crop");
+		run("Animation Options...", "speed=" + saved_speed);
+		saveAs("Tiff", output_folder_path + baseName + "_crop.tif");
 	}
 	closeAllExcept(otherIDs);
 }

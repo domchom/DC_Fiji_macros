@@ -1,51 +1,55 @@
-// !Automated_DiffMC.ijm
-// Makes difference movies: for each selected channel, frame t+N minus frame t.
-// Negative values are clipped to 0 and the result is saved as 16-bit.
-// Unselected channels are left out of the output.
+// batch_ChannelMath.ijm
+// Computes  channel_a <operation> channel_b  for every open image.
+// The result is added as the last channel. Channels a and b are dropped
+// unless keep_inputs = true.
+// Divide is done in 32-bit (other channels are converted to match).
+// Subtract keeps the original bit depth (negative values clip to 0).
 //
-// Usage:  open the movies, edit the parameters below, run.
-// Output: <name>_diff<N>.tif
+// Usage:  open the images, edit the parameters below, run.
+// Output: <name>_<a><op><b>.tif   e.g. _C1-C2.tif, _C1divC2.tif
 
 // ===== PARAMETERS =====
-output_folder_path  = "/Volumes/DOM_SEVEN/!Ect2-FL-tagged-waves-vs-PIPs/!combined/raw_crop_diff/"; // "" = ask
-channels_to_process = "all";   // "all" or a list, e.g. "1,3"
-difference_number   = 12;      // N, in frames
+output_folder_path = "/Volumes/DOM_SEVEN/376DCE_260707_embryo_controlvWTvWA_SFC/!processed_images/raw_c1-c2/"; // "" = ask
+operation   = "Subtract";   // "Subtract" or "Divide"
+channel_a   = 1;
+channel_b   = 2;
+keep_inputs = false;
 // ======================
 
 output_folder_path = prepareOutputFolder(output_folder_path);
+if (operation == "Divide") { calcOp = "Divide create 32-bit stack"; tag = "div"; }
+else                       { calcOp = "Subtract create stack";       tag = "-";   }
 
 while (nImages > 0) {
 	otherIDs = getOtherImageIDs();
-	baseName = getBaseName(getTitle());
+	title = getTitle();
+	baseName = getBaseName(title);
 
-	nCh = splitChannels();
-	results = newArray(0);
-	for (c = 1; c <= nCh; c++) {
-		if (!isChannelSelected(channels_to_process, c)) continue;
-		selectWindow("__ch" + c);
-		n = nSlices;
-		duplicateRange("__late", difference_number + 1, n);
-		selectWindow("__ch" + c);
-		duplicateRange("__early", 1, n - difference_number);
-		imageCalculator("Subtract create 32-bit stack", "__late", "__early");
-		rename("__diff" + c);
-		setMinAndMax(0, 65536);
-		run("16-bit");
-		run("Enhance Contrast", "saturated=0.35");
-		close("__late");
-		close("__early");
-		results = Array.concat(results, "__diff" + c);
+	getDimensions(w, h, nCh, s, f);
+	if (channel_a > nCh || channel_b > nCh) {
+		print("Skipped (only " + nCh + " channels): " + title);
+		closeAllExcept(otherIDs);
+		continue;
 	}
-	mergeChannels(results);
 
-	saveAs("Tiff", output_folder_path + baseName + "_diff" + difference_number + ".tif");
+	splitChannels();
+	imageCalculator(calcOp, "__ch" + channel_a, "__ch" + channel_b);
+	rename("__result");
+
+	names = newArray(0);
+	for (c = 1; c <= nCh; c++) {
+		if (!keep_inputs && (c == channel_a || c == channel_b)) continue;
+		if (operation == "Divide") {
+			selectWindow("__ch" + c);
+			run("32-bit");   // Merge Channels needs matching bit depths
+		}
+		names = Array.concat(names, "__ch" + c);
+	}
+	names = Array.concat(names, "__result");
+	mergeChannels(names);
+
+	saveAs("Tiff", output_folder_path + baseName + "_C" + channel_a + tag + "C" + channel_b + ".tif");
 	closeAllExcept(otherIDs);
-}
-
-// Duplicates slices/frames first..last of the active single-channel stack.
-function duplicateRange(newTitle, first, last) {
-	if (Stack.isHyperstack) run("Duplicate...", "title=" + newTitle + " duplicate frames=" + first + "-" + last);
-	else run("Duplicate...", "title=" + newTitle + " duplicate range=" + first + "-" + last);
 }
 
 
@@ -130,12 +134,4 @@ function mergeChannels(names) {
 	args = "";
 	for (i = 0; i < names.length; i++) args = args + "c" + (i + 1) + "=[" + names[i] + "] ";
 	run("Merge Channels...", args + "create");
-}
-
-// Returns true if channel c is in spec ("all" or a list such as "1,3").
-function isChannelSelected(spec, c) {
-	if (spec == "all") return true;
-	parts = split(spec, ", ");
-	for (i = 0; i < parts.length; i++) if (parseInt(parts[i]) == c) return true;
-	return false;
 }

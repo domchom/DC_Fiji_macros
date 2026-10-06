@@ -1,36 +1,35 @@
-// batch_SelectRoiKymo.ijm
-// Interactive kymographs: plays each open movie, waits for you to draw a line,
-// then reslices along it to make a kymograph.
+// batch_ReorderHyperstack.ijm
+// Swaps two hyperstack dimensions of every open image (e.g. to fix files where z
+// and t were mixed up), optionally followed by a max projection over z.
 //
-// Usage:  open the movies, edit the parameters below, run. Draw a line
-//         (set its width with a double-click on the line tool), click OK.
-//         Images with no selection are skipped (closed without saving).
-// Output: <name>_kymo.tif
+// Usage:  open the images, edit the parameters below, run.
+// Output: <name>_reordered.tif   or   <name>_MIP.tif when max_project = true
 
 // ===== PARAMETERS =====
-output_folder_path = "/Volumes/DOM_SEVEN/369DCE_260617_xEct2-tagged_test-SFC/med/!processed_images/raw_crop_diff/1width-kymo/"; // "" = ask
-preview_speed = 40;   // playback fps while choosing
+output_folder_path = "/Users/domchom/Desktop/241202/!processed_images/"; // "" = ask
+swap        = "z-t";   // "z-t", "c-z" or "c-t"
+max_project = false;   // max-project over z (all frames) after swapping
 // ======================
+
+if      (swap == "z-t") order = "channels=[Channels (c)] slices=[Frames (t)] frames=[Slices (z)]";
+else if (swap == "c-z") order = "channels=[Slices (z)] slices=[Channels (c)] frames=[Frames (t)]";
+else if (swap == "c-t") order = "channels=[Frames (t)] slices=[Slices (z)] frames=[Channels (c)]";
+else exit("Unknown swap: " + swap);
 
 output_folder_path = prepareOutputFolder(output_folder_path);
 
 while (nImages > 0) {
 	otherIDs = getOtherImageIDs();
-	inputID = getImageID();
-	title = getTitle();
-	baseName = getBaseName(title);
+	baseName = getBaseName(getTitle());
 
-	run("Animation Options...", "speed=" + preview_speed);
-	doCommand("Start Animation [\\]");
-	waitForUser("Draw the kymograph line for " + title);
-	selectImage(inputID);
-
-	if (selectionType() == -1) {
-		print("Skipped (no selection): " + title);
-	} else {
-		run("Reslice [/]...", "output=1.000 slice_count=1 avoid");
-		saveAs("Tiff", output_folder_path + baseName + "_kymo.tif");
+	run("Re-order Hyperstack ...", order);
+	suffix = "_reordered";
+	if (max_project) {
+		run("Z Project...", "projection=[Max Intensity] all");
+		suffix = "_MIP";
 	}
+
+	saveAs("Tiff", output_folder_path + baseName + suffix + ".tif");
 	closeAllExcept(otherIDs);
 }
 
